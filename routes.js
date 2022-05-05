@@ -16,6 +16,21 @@ routes.get("/marcas", MarcaController.index)
       .post("/marcas", MarcaController.store);
 
 routes.get("/carros", CarroController.index)
-      .post("/carros", CarroController.store);
+      .post("/carros", CarroController.store)
+      .put("/carros/:id", CarroController.update)
+      .delete("/carros/:id", CarroController.destroy)
+
+      .put("/carros/destaque/:id", CarroController.destaque)
+      .get("/carros/destaques", CarroController.destaques)
+
+      .put("/carros/reajuste/:taxa/:marca_id?", CarroController.updateValue)
+
+      .get("/carros/filtro/:palavra", CarroController.search)
+      .get("/carros/filtro-preco", CarroController.filter)
+
+      .get("/carros/marcas-num", CarroController.groupMarcas)
+      .get("/carros/anos-cad", CarroController.groupDataCad)
+
+      .get("/carros/:id", CarroController.show)
 
 module.exports = routes;
