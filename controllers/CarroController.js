@@ -9,7 +9,7 @@ module.exports = {
 
             const carros = await dbKnex("carros as c")
                 .select("c.id", "modelo", "foto", "ano", "preco", "destaque",
-                    "m.nome as marca", "u.nome as usuario")
+                    "m.nome as marca", dbKnex.raw("u.id || '-' || u.nome as usuario"), "n_likes", "n_dislikes")
                 .innerJoin('marcas as m', 'marca_id', 'm.id')
                 .innerJoin('usuarios as u', 'usuario_id', 'u.id')
             res.status(200).json(carros); // retorna statusCode ok e os dados
