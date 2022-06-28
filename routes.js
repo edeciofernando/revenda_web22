@@ -1,11 +1,15 @@
 const express = require("express");
 const routes = express.Router();
+const cors = require('cors')
 
 const UsuarioController = require("./controllers/UsuarioController");
 const MarcaController = require("./controllers/MarcaController");
 const CarroController = require("./controllers/CarroController");
+const LikeController = require("./controllers/LikeController");
 
 const login = require("./middlewares/login");
+
+routes.use(cors())
 
 routes.get("/usuarios", UsuarioController.index)
       .post("/usuarios", login, UsuarioController.store)
@@ -32,5 +36,8 @@ routes.get("/carros", CarroController.index)
       .get("/carros/anos-cad", CarroController.groupDataCad)
 
       .get("/carros/:id", CarroController.show)
+
+routes.get("/likes", LikeController.index)
+      .post("/likes", login, LikeController.store);
 
 module.exports = routes;
